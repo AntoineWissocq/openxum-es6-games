@@ -176,14 +176,14 @@
 
             let engine = new window.OpenXum.Sixth.Engine(0, 1);
 
-            let p = new window.OpenXum.Sixth.Piece({_letter : "A", _number : 1}, 1, 5);
-            let q = new window.OpenXum.Sixth.Piece({_letter : "E", _number : 1}, 1, 1);
+            let p = new window.OpenXum.Sixth.Piece({_letter : "D", _number : 2}, 0, 1);
+            let q = new window.OpenXum.Sixth.Piece({_letter : "E", _number : 2}, 1, 1);
             //let r = new window.OpenXum.Sixth.Piece({_letter : "A", _number : 5}, 1, 1);
 
-            p._stack.push(1);
-            p._stack.push(1);
-            p._stack.push(1);
-            p._stack.push(1);
+            //p._stack.push(1);
+            //p._stack.push(1);
+            //p._stack.push(1);
+            //p._stack.push(1);
 
             engine._tabPiece.push(p);
             engine._tabPiece.push(q);
@@ -192,13 +192,45 @@
             //console.log("taille liste avant: ", engine._tabPiece.length);
             console.log("contenu avant:  ", JSON.stringify(engine._tabPiece));
 
-            engine._move_piece(p._coordinates,p._stack,p._level,2,q._coordinates);
+            engine._move_piece(p._coordinates,p._stack,p._level,1,q._coordinates);
 
             //console.log("taille liste après: ", engine._tabPiece.length);
             console.log("contenu après:  ", engine._tabPiece);
 
-            assert.ok(engine._tabPiece.length === 2);
+            assert.ok(engine._tabPiece.length === 1);
         });
+
+        QUnit.test("test possible_move_list", function (assert) {
+
+            let engine = new window.OpenXum.Sixth.Engine(0, 1);
+
+            let p = new window.OpenXum.Sixth.Piece({_letter : "A", _number : 1}, 1, 1);
+            let q = new window.OpenXum.Sixth.Piece({_letter : "B", _number : 1}, 1, 2);
+            let r = new window.OpenXum.Sixth.Piece({_letter : "B", _number : 4}, 1, 1);
+            //let s = new window.OpenXum.Sixth.Piece({_letter : "E", _number : 4}, 1, 1);
+
+
+
+            q._stack.push(1);
+
+            engine._tabPiece.push(p);
+            engine._tabPiece.push(q);
+            engine._tabPiece.push(r);
+
+
+            //engine._tabPiece.push(s);
+
+
+
+            let tab = engine.get_possible_allmove_list();
+
+            //console.log("taille liste: ", tab.length);
+            console.log("contenu :  ", tab);
+
+            assert.ok(tab.length === 26);
+        });
+
+
 
 
     </script>
